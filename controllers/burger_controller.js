@@ -12,7 +12,7 @@ module.exports.router = function(express, app) {
   app.set('view engine', 'handlebars');
 
   app.get('/', function(req, res) {
-    res.render(index);
+    res.render('index');
   });
 
   app.post('/', function(req, res) {
