@@ -1,22 +1,20 @@
-const connection = require('./connection');
-
-module.exports.orm = {
-  selectAll : async function(database) {
-    const queryString = 'SELECT * FROM ?';
+let orm = {
+  selectAll : async function(tableName) {
+    const connection = await require('./connection')();
+    const queryString = `SELECT * FROM ${tableName}`;
 
     try {
-      let res = await connection.query(
-        queryString,
-        [database]
-      );
-      console.log(res)
+      let [rows, fields] = await connection.execute(queryString);
+      console.log('res',rows);
+      return res;
     } catch (error) {
       console.log(error);
     }
   },
   insertOne : async function(burgerString) {
+    const connection = await require('./connection')();
     const queryString = 'INSERT INTO burgers (name) VALUE (?)';
-
+    console.log(burgerString);
     try {
       let res = await connection.query(
         queryString,
@@ -28,6 +26,7 @@ module.exports.orm = {
     }
   },
   updateOne : async function(updateString, id) {
+    const connection = await require('./connection')();
     const queryString = 'UPDATE burgers SET name = ? WHERE id = ?';
 
     try {
@@ -41,3 +40,5 @@ module.exports.orm = {
     }   
   }
 }
+
+module.exports = orm;

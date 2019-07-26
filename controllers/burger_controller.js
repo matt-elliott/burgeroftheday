@@ -1,18 +1,17 @@
 module.exports.router = function(express, app) {
-  // const express = require('express');
-  // const app = express();
   const bodyParser = require('body-parser');
   const handlebars = require('express-handlebars');
-  const orm = require('../config/orm');
+  const Burgers = require('../models/burger');
 
+  app.use('/assets', express.static('public'));
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
-
   app.engine('handlebars', handlebars({extended: true}));
   app.set('view engine', 'handlebars');
 
-  app.get('/', function(req, res) {
-    res.render('index');
+  app.get('/', async function(req, res) {
+    let data = await Burgers.getAll('burgers');
+    res.render('index', data);
   });
 
   app.post('/', function(req, res) {
