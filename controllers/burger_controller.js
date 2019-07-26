@@ -11,12 +11,11 @@ module.exports.router = function(express, app) {
 
   app.get('/', async function(req, res) {
     let burgers = await Burgers.getAll('burgers');
-    // console.log(burgers);
     res.render('index', {burgers: burgers});
   });
 
-  app.post('/', function(req, res) {
-    console.log('a post been made');
-    res.redirect('/');
+  app.post('/', async function({body}, res) {
+    let status = await Burgers.addNew(body.burger);
+    res.end();
   })
 };

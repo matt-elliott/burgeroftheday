@@ -1,5 +1,6 @@
 const orm = require('../config/orm');
 const selectAll = orm.selectAll;
+const insertOne = orm.insertOne;
 
 let Burgers = {
   getAll: async function(tableName) {
@@ -16,8 +17,17 @@ let Burgers = {
     return burgers;
   },
   
-  addNew: function(data) {
-    orm.insertOne(data);
+  addNew: async function(burger) {
+    let newBurger = await insertOne(burger);
+    if(newBurger[0].affectedRows > 0) {
+      return {
+        statusCode: 200
+      };
+    } else {
+      return {
+        statusCode: 500
+      }
+    }
   },
 
   devour: function() {
