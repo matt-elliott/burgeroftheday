@@ -6,6 +6,19 @@
 
 <div class="row">
   <header class="col-12">
+    <h3>Burgers of The Day</h3>
+  </header>
+  <ul class="col-12">
+    {{#each burgers}}
+    <li class="{{className}}">
+      <h5>{{id}}: {{name}}</h5>
+    </li>
+    {{/each}}
+  </ul>
+</div>
+
+<div class="row">
+  <header class="col-12">
     {{!-- TODO put some kind of bobs burger image header --}}
     <h3>Burger of The Day</h3>
   </header>

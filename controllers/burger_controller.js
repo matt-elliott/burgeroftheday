@@ -10,8 +10,9 @@ module.exports.router = function(express, app) {
   app.set('view engine', 'handlebars');
 
   app.get('/', async function(req, res) {
-    let data = await Burgers.getAll('burgers');
-    res.render('index', data);
+    let burgers = await Burgers.getAll('burgers');
+    // console.log(burgers);
+    res.render('index', {burgers: burgers});
   });
 
   app.post('/', function(req, res) {

@@ -5,8 +5,7 @@ let orm = {
 
     try {
       let [rows, fields] = await connection.execute(queryString);
-      console.log('res',rows);
-      return res;
+      return rows;
     } catch (error) {
       console.log(error);
     }
