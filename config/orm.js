@@ -12,13 +12,10 @@ let orm = {
   },
   insertOne : async function(burgerString) {
     const connection = await require('./connection')();
-    const queryString = 'INSERT INTO burgers (name) VALUE (?)';
+    const queryString = `INSERT INTO burgers (name) VALUE (${burgerString})`;
     console.log(burgerString);
     try {
-      let res = await connection.query(
-        queryString,
-        [burgerString]
-      );
+      let res = await connection.query(queryString);
       console.log(res)
     } catch (error) {
       console.log(error);
