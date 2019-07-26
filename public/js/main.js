@@ -13,11 +13,17 @@ $('#burgerInput').on('submit', function(event) {
 });
 
 $(document).on('click', '#burgers-of-the-day .devour', function(event){
-  let id = $(this).attr('data-burger-id');
+  const btn = $(this);
+  let id = btn.attr('data-burger-id');
   $.post(
     `/api/update/${id}`,
-    function(res) {
-      console.log(res);
+    function(status) {
+      if(status === 200) {
+        btn.addClass('devoured');
+      } else {
+        btn.removeClass('devoured');
+        btn.addClass('not-devoured');
+      }
     }
   )
 })

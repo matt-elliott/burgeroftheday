@@ -21,16 +21,15 @@ let orm = {
       console.log(error);
     }
   },
-  updateOne : async function(updateString, id) {
+  updateOne : async function(id) {
     const connection = await require('./connection')();
-    const queryString = 'UPDATE burgers SET name = ? WHERE id = ?';
+    const queryString = `UPDATE burgers SET devoured = 1 WHERE id = ${id}`;
 
     try {
       let res = await connection.query(
-        queryString,
-        [updateString, id]
+        queryString
       );
-      console.log(res)
+      return res;
     } catch (error) {
       console.log(error);
     }   

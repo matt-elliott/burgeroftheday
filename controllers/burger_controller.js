@@ -17,5 +17,10 @@ module.exports.router = function(express, app) {
   app.post('/', async function({body}, res) {
     let status = await Burgers.addNew(body.burger);
     res.end();
-  })
+  });
+  
+  app.post('/api/update/:id', async function({params}, res) {
+    let status = await Burgers.devour(params.id);
+    res.sendStatus(status);
+  });
 };

@@ -1,6 +1,7 @@
 const orm = require('../config/orm');
 const selectAll = orm.selectAll;
-const insertOne = orm.insertOne;
+const insert = orm.insert;
+const update = orm.updateOne;
 
 let Burgers = {
   getAll: async function(tableName) {
@@ -18,8 +19,8 @@ let Burgers = {
   },
   
   addNew: async function(burger) {
-    let newBurger = await insertOne(burger);
-    if(newBurger[0].affectedRows > 0) {
+    let res = await insert(burger);
+    if(res[0].affectedRows > 0) {
       return {
         statusCode: 200
       };
@@ -30,8 +31,11 @@ let Burgers = {
     }
   },
 
-  devour: function() {
-
+  devour: async function(burgerId) {
+    let res = await update(burgerId);
+    if(res[0].serverStatus === 2) {
+      return 200;
+    }
   }
 }
 
