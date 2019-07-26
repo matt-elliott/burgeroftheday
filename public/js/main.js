@@ -10,5 +10,15 @@ $('#burgerInput').on('submit', function(event) {
       location.reload();
     }
   );
+});
+
+$(document).on('click', '#burgers-of-the-day .devour', function(event){
+  let id = $(this).attr('data-burger-id');
+  $.post(
+    `/api/update/${id}`,
+    function(res) {
+      console.log(res);
+    }
+  )
 })
 })()
