@@ -6,16 +6,19 @@ const update = orm.updateOne;
 let Burgers = {
   getAll: async function(tableName) {
     let burgers = await selectAll(tableName);
-    
+    let burgersArray = [];
+    let devouredArray = [];
     burgers.forEach(function(burger) {
       if(burger.devoured === 0) {
-        burger.className = 'not-devoured';
+        burger.className = '';
+        burgersArray.push(burger);
       } else {
         burger.className = 'devoured';
+        devouredArray.push(burger);
       }
     });
 
-    return burgers;
+    return {burgers: burgersArray, devoured:devouredArray};
   },
   
   addNew: async function(burger) {

@@ -10,7 +10,7 @@ let orm = {
       console.log(error);
     }
   },
-  insertOne : async function(burgerString) {
+  insert : async function(burgerString) {
     const connection = await require('./connection')();
     const queryString = `INSERT INTO burgers (name) VALUE ("${burgerString}")`;
     

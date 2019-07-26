@@ -8,8 +8,16 @@
   <header class="col-12">
     <h3>Burgers of The Day</h3>
   </header>
-  <ul class="col-12" id="burgers-of-the-day">
+  <ul class="col-6" id="burgers-of-the-day">
     {{#each burgers}}
+    <li class="{{className}}">
+      <h5>{{id}}: {{name}}</h5>
+      <button class="btn btn-primary devour" data-burger-id="{{id}}">Devour</button>
+    </li>
+    {{/each}}
+  </ul>
+  <ul class="col-6" id="devoured-burgers">
+    {{#each devoured}}
     <li class="{{className}}">
       <h5>{{id}}: {{name}}</h5>
       <button class="btn btn-primary devour" data-burger-id="{{id}}">Devour</button>
