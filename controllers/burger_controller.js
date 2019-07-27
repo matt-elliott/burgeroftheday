@@ -9,18 +9,36 @@ module.exports.router = function(express, app) {
   app.engine('handlebars', handlebars({extended: true}));
   app.set('view engine', 'handlebars');
 
-  app.get('/', async function(req, res) {
-    let result = await Burgers.getAll('burgers');
-    res.render('index', {burgers: result.burgers, devoured: result.devoured});
+  app.get('/', async function (req, res) {
+    try {
+      let result = await Burgers.getAll('burgers');
+      res.render('index', {
+        burgers: result.burgers,
+        devoured: result.devoured
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    
   });
 
-  app.post('/', async function({body}, res) {
-    let status = await Burgers.addNew(body.burger);
-    res.end();
+  app.post('/', async function ({ body }, res) {
+    try {
+      let status = await Burgers.addNew(body.burger);
+      res.end();  
+    } catch (error) {
+      console.log(error);
+    }
+    
   });
   
-  app.post('/api/update/:id', async function({params}, res) {
-    let status = await Burgers.devour(params.id);
-    res.sendStatus(status);
+  app.post('/api/update/:id', async function ({ params }, res) {
+    try {
+      let status = await Burgers.devour(params.id);
+      res.sendStatus(status);  
+    } catch (error) {
+      console.log(error);
+    }
+    
   });
 };

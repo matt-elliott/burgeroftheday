@@ -1,7 +1,7 @@
 (async function() {
   const express = require('express');
   const app = express();
-  const port = process.env.PORT || 9924;
+  const port = process.env.PORT || 3000;
   
   require('./controllers/burger_controller').router(express, app);
 
