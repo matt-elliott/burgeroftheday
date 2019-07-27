@@ -53,6 +53,9 @@ ul li {
   border: 4px solid var(--white);
   color: var(--white);
 }
+#suggestion-box label {
+  display: block;
+}
 input::placeholder,
 input::-moz-placeholder,
 input::-webkit-input-placeholder {
